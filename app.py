@@ -5,16 +5,16 @@ mishak_milim = Flask(__name__, static_folder='frontend/build', static_url_path='
 cors = CORS(mishak_milim)
 
 
-@mishak_milim.route('/api')
-@cross_origin()
-def welcome():
-    return "Welcome to the API!!!"
-
-
 @mishak_milim.route('/api/generate/')
 @cross_origin()
 def generate_word():
     return "Word"
+
+
+@mishak_milim.route('/api')
+@cross_origin()
+def welcome():
+    return "Welcome to the API!!!"
 
 
 @mishak_milim.route('/')
