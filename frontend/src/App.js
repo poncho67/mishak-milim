@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import { useState } from 'react';
+
+class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentWord: 'אוצר מילים'
+        };
+    }
 
 
-function callApi() {
-//  alert('Button was pressed!');
-//  .then(data => alert(data))
-  fetch('./api/generate', { method: 'GET' })
-   .then(data => data.json())
-   .then(json => alert(JSON.stringify(json)))
-}
+   getWord() {
+       fetch('./api/generate', { method: 'GET' })
+       .then(data => data.json())
+       .then(json => this.setState({ currentWord: json['word'] }))
+   }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-         <button onClick={callApi}>Call API</button>
-      </header>
-    </div>
-  );
+
+   render() {
+       return (
+           <div>
+               <button onClick={() => this.getWord()}> Get word </button>
+               <div>{this.state.currentWord}</div>
+           </div>
+       )
+   }
 }
 
 export default App;
