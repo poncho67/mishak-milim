@@ -4,11 +4,10 @@ import './App.css';
 
 function callApi() {
 //  alert('Button was pressed!');
+//  .then(data => alert(data))
   fetch('./api/generate', { method: 'GET' })
-  .then(data => alert(data))
-//  .then(data => data.json())
-//     // Parsing the data into a JavaScript object
-//    .then(json => alert(JSON.stringify(json)))
+   .then(data => data.json())
+   .then(json => alert(JSON.stringify(json)))
 }
 
 function App() {

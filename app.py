@@ -1,14 +1,24 @@
+import json
+
 from flask import Flask, render_template, send_from_directory, request, jsonify, make_response
 from flask_cors import CORS, cross_origin
+import random
 
 mishak_milim = Flask(__name__, static_folder='frontend/build', static_url_path='')
 cors = CORS(mishak_milim)
+
+words = ["לילו", "שירו", "אוגר", "חתול", "כלב"]
 
 
 @mishak_milim.route('/api/generate/')
 @cross_origin()
 def generate_word():
-    return "Word"
+
+    n = random.randint(0, len(words) - 1)
+    response = {
+        'word': words[n]
+    }
+    return json.dumps(response)
 
 
 @mishak_milim.route('/api')
