@@ -14,6 +14,7 @@ migrate = Migrate(mishak_milim, db)
 cors = CORS(mishak_milim)
 
 
+
 class WordsModel(db.Model):
     __tablename__ = 'words'
 
