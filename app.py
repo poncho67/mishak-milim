@@ -14,11 +14,7 @@ words = ["לילו", "שירו", "אוגר", "חתול", "כלב"]
 @mishak_milim.route('/api/generate/')
 @cross_origin()
 def generate_word():
-    n = random.randint(0, len(words) - 1)
-    response = {
-        'word': words[n]
-    }
-    return json.dumps(response)
+    return handle_get()
 
 
 @mishak_milim.route('/api')
@@ -41,7 +37,7 @@ def handle_post(post_request):
         return {"error": "The request payload is not in JSON format"}
 
 
-def handle_get(get_request):
+def handle_get():
     conn = psycopg2.connect("postgresql://yaron:postgres@localhost:5432/milim")
     cur = conn.cursor()
     sql = "SELECT word FROM words ORDER BY RANDOM() LIMIT 1"
@@ -60,7 +56,7 @@ def handle_words():
     if request.method == 'POST':
         return handle_post(request)
     elif request.method == 'GET':
-        return handle_get(request)
+        return handle_get()
 
 
 @mishak_milim.route('/')
