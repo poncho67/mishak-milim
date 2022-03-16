@@ -1,0 +1,23 @@
+## Misjak-Milim
+A simple app which generates random words for several games
+
+## Backend
+Flask + Python + Postgres
+
+## Frontend
+React
+
+## Deployed
+Heroku
+
+## Local Debugging (edit run configuration)
+Environment variable
+    DATABASE_URL=postgresql://yaron:postgres@localhost:5432/milim
+Script path
+    /Users/yaron/code/mishak-milim/venv/bin/flask
+Parameters
+    run
+
+## Local Debugging
+    heroku logs --tail
+    heroku psql
