@@ -1,4 +1,5 @@
 import json
+import os
 import random
 
 import psycopg2
@@ -25,7 +26,9 @@ def welcome():
 
 def handle_post(post_request):
     if post_request.is_json:
-        conn = psycopg2.connect("postgresql://yaron:postgres@localhost:5432/milim")
+        database_url = os.getenv('DATABASE_URL')
+        print(f"handle_post database url: {database_url}")
+        conn = psycopg2.connect(database_url)
         cur = conn.cursor()
         data = post_request.get_json()
         cur.execute("insert into words (word) VALUES(%s)", (data['word'],))
@@ -38,7 +41,9 @@ def handle_post(post_request):
 
 
 def handle_get():
-    conn = psycopg2.connect("postgresql://yaron:postgres@localhost:5432/milim")
+    database_url = os.getenv('DATABASE_URL')
+    print(f"handle_get database url: {database_url}")
+    conn = psycopg2.connect(database_url)
     cur = conn.cursor()
     sql = "SELECT word FROM words ORDER BY RANDOM() LIMIT 1"
     cur.execute(sql)
