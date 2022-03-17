@@ -18,10 +18,12 @@ def generate_word():
     return handle_get()
 
 
-@mishak_milim.route('/api')
-@cross_origin()
-def welcome():
-    return "Welcome to the API!!!"
+@mishak_milim.route('/word', methods=['POST', 'GET'])
+def handle_words():
+    if request.method == 'POST':
+        return handle_post(request)
+    elif request.method == 'GET':
+        return handle_get()
 
 
 def handle_post(post_request):
@@ -54,14 +56,6 @@ def handle_get():
     cur.close()
     conn.close()
     return json.dumps(response)
-
-
-@mishak_milim.route('/word', methods=['POST', 'GET'])
-def handle_words():
-    if request.method == 'POST':
-        return handle_post(request)
-    elif request.method == 'GET':
-        return handle_get()
 
 
 @mishak_milim.route('/')
