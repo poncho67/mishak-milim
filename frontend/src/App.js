@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import { useState } from 'react';
-
 import { MemoryRouter, Switch, Route } from 'react-router-dom';
-
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
