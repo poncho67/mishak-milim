@@ -8,8 +8,31 @@ import { LinkContainer } from 'react-router-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
-class App extends Component {
+class NavigationBar extends Component {
+    render() {
+       return (
+            <Navbar bg="light" expand="lg">
+                <Container>
+                    <Navbar.Brand href="#home">המשחקיה</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Nav.Link href="#home">עמוד הבית</Nav.Link>
+                            <NavDropdown title="משחקים" id="basic-nav-dropdown">
+                                  <NavDropdown.Item href="#action/3.1">פנטומימה</NavDropdown.Item>
+                                  <NavDropdown.Item href="#action/3.2">קונטקט</NavDropdown.Item>
+                                  <NavDropdown.Item href="#action/3.3">כיד הדמיון</NavDropdown.Item>
+                            </NavDropdown>
+                            <Nav.Link href="#link">הוסף מילה</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+       );
+    }
+}
 
+class PantomimaPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,40 +60,31 @@ class App extends Component {
     }
 
 
-   getWord() {
+    getWord() {
        fetch('./word', { method: 'GET' })
        .then(data => data.json())
        .then(json => this.setState({ currentWord: json['word'] }))
-   }
+    }
 
+    render() {
+        return (
+            <div>
+                <button variant="primary" className="btn-primary" onClick={() => this.getWord()}> חפש מילה </button>
+                <div>{this.state.currentWord}</div>
+                <h2>הצע מילה חדשה </h2>
+                <input onChange={this.onChangeHandler} type="text"/>
+                <button variant="secondary" onClick={this.onClickHandler}>שלח</button>
+            </div>
+        );
+    }
+}
 
+class App extends Component {
    render() {
        return (
            <div>
-                <Navbar bg="light" expand="lg">
-                    <Container>
-                        <Navbar.Brand href="#home">המשחקיה</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="mr-auto">
-                                <Nav.Link href="#home">עמוד הבית</Nav.Link>
-                                <NavDropdown title="משחקים" id="basic-nav-dropdown">
-                                      <NavDropdown.Item href="#action/3.1">פנטומימה</NavDropdown.Item>
-                                      <NavDropdown.Item href="#action/3.2">קונטקט</NavDropdown.Item>
-                                      <NavDropdown.Item href="#action/3.3">כיד הדמיון</NavDropdown.Item>
-                                </NavDropdown>
-                                <Nav.Link href="#link">הוסף מילה</Nav.Link>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
-
-
-               <button variant="primary" className="btn-primary" onClick={() => this.getWord()}> חפש מילה </button>
-               <div>{this.state.currentWord}</div>
-               <h2>הצע מילה חדשה </h2>
-               <input onChange={this.onChangeHandler} type="text"/>
-               <button variant="secondary" onClick={this.onClickHandler}>שלח</button>
+               <NavigationBar />
+               <PantomimaPage />
            </div>
        )
    }
