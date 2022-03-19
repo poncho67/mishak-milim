@@ -17,6 +17,21 @@ class HomePage extends Component {
     }
 }
 
+class DrawingPage extends Component {
+    render() {
+       return (
+        <h2>כיד הדמיון</h2>
+       )
+    }
+}
+
+class ContactPage extends Component {
+    render() {
+       return (
+        <h2>קונטקט</h2>
+       )
+    }
+}
 class PantomimePage extends Component {
     constructor(props) {
         super(props);
@@ -39,7 +54,7 @@ class PantomimePage extends Component {
     render() {
         return (
             <div>
-                <button variant="primary" className="btn-primary" onClick={() => this.getWord()}> חפש מילה </button>
+                <button variant="primary" className="btn-primary" onClick={() => this.getWord()}> ג׳נרט לי מילה </button>
                 <div>{this.state.currentWord}</div>
             </div>
         );
@@ -89,8 +104,8 @@ class NavigationBar extends Component {
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
                                 <Nav.Link as={Link} to={"pantomime"}>פנטומימה</Nav.Link>
-                                 <Nav.Link as={Link} to={"pantomime"}>קונטקט</Nav.Link>
-                                 <Nav.Link as={Link} to={"pantomime"}>כיד הדמיון</Nav.Link>
+                                 <Nav.Link as={Link} to={"contact"}>קונטקט</Nav.Link>
+                                 <Nav.Link as={Link} to={"drawing"}>כיד הדמיון</Nav.Link>
                                  <Nav.Link as={Link} to={"add"}>הוסף מילה</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
@@ -111,6 +126,8 @@ class App extends Component {
                     <Routes>
                         <Route path="/" element={<HomePage />}></Route>
                         <Route path="pantomime" element={<PantomimePage />}></Route>
+                        <Route path="drawing" element={<DrawingPage />}></Route>
+                        <Route path="contact" element={<ContactPage />}></Route>
                         <Route path="add" element={<AddWordPage />}></Route>
                         <Route path="*" element={<HomePage />}></Route>
                     </Routes>
