@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import MyCountDown from '../components/MyCountDown'
+import Another from '../components/Another'
+import Last from '../components/Last'
 
 class PantomimePage extends Component {
     constructor(props) {
@@ -26,6 +28,8 @@ class PantomimePage extends Component {
                 <button variant="primary" className="btn-primary" onClick={() => this.getWord()}> ג׳נרט לי מילה </button>
                 <div>{this.state.currentWord}</div>
                 <MyCountDown />
+                <Another />
+                <Last />
             </div>
         );
     }
