@@ -7,13 +7,29 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import { LinkContainer } from 'react-router-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav } from 'react-bootstrap';
+import Countdown from 'react-countdown';
+
+
+const Completionist = () => <span style="color: #ff0000">זמנך עבר!</span>;
+
+const renderer = ({ hours, minutes, seconds, completed }) => {
+  if (completed) {
+    return <Completionist />;
+  } else {
+    return <span>{minutes}:{seconds}</span>;
+  }
+};
+
+export const MyCountDown = () => {
+  return <div><Countdown date={Date.now() + 120000} renderer={renderer} /></div>;
+}
 
 
 class HomePage extends Component {
     render() {
        return (
         <h2>המשחקיה</h2>
-       )
+       );
     }
 }
 
@@ -21,7 +37,7 @@ class DrawingPage extends Component {
     render() {
        return (
         <h2>כיד הדמיון</h2>
-       )
+       );
     }
 }
 
@@ -29,7 +45,7 @@ class ContactPage extends Component {
     render() {
        return (
         <h2>קונטקט</h2>
-       )
+       );
     }
 }
 class PantomimePage extends Component {
@@ -42,13 +58,13 @@ class PantomimePage extends Component {
 
     onChangeHandler=(event)=>{
        var mydata = event.target.value;
-       this.setState({postNewWord:mydata})
+       this.setState({postNewWord:mydata});
     }
 
     getWord() {
        fetch('./word', { method: 'GET' })
        .then(data => data.json())
-       .then(json => this.setState({ currentWord: json['word'] }))
+       .then(json => this.setState({ currentWord: json['word'] }));
     }
 
     render() {
@@ -56,6 +72,7 @@ class PantomimePage extends Component {
             <div>
                 <button variant="primary" className="btn-primary" onClick={() => this.getWord()}> ג׳נרט לי מילה </button>
                 <div>{this.state.currentWord}</div>
+                <MyCountDown />
             </div>
         );
     }
@@ -72,14 +89,14 @@ class AddWordPage extends Component {
 
      postNewWord=()=>{
         const json_body = JSON.stringify({ word: this.state.postNewWord });
-        console.log('json_body: ' + json_body)
+        console.log('json_body: ' + json_body);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: json_body
         };
         fetch('./word', requestOptions)
-            .then(response => response.json())
+            .then(response => response.json());
     }
 
      render() {
@@ -133,7 +150,7 @@ class App extends Component {
                     </Routes>
                 </div>
             </div>
-        )
+        );
     }
 }
 
